@@ -41,9 +41,16 @@ async def get_result(bot: Bot, event: Event, state: T_State):
         result = f'已加载插件：\n{newline_char.join(plugin_names)}'
     else:
         try:
-            result = nonebot.plugin.get_plugin(state.get("content")).module.__getattribute__("__usage__")
+            plugin = nonebot.plugin.get_plugin(state.get("content"))
+        except AttributeError:
+            plugin = None
+        try:
+            result = plugin.module.__getattribute__("__usage__")
         except:
-            result = nonebot.plugin.get_plugin(state.get("content")).module.__doc__
+            try:
+                result = plugin.module.__doc__
+            except AttributeError:
+                result = f'{state.get("content")}插件不存在或未加载'
     await helper.finish(Message().append(at).append(MessageSegment.text(result)))
 
 
