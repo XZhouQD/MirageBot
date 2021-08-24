@@ -1,8 +1,11 @@
 import random
+import nonebot
+
+default_start = list(nonebot.get_driver().config.command_start)[0]
 
 
-async def roll_dice(xdy_aSb: str):
-    a, b, x, y = parse_cmd(xdy_aSb)
+async def roll_dice(xdy_asb: str):
+    a, b, x, y = parse_cmd(xdy_asb)
 
     if x < 1 or y < 1:
         help_text = await get_help()
@@ -31,8 +34,8 @@ async def roll_dice(xdy_aSb: str):
     return result
 
 
-def parse_cmd(xdy_aSb):
-    xdy_list = xdy_aSb.split('+')
+def parse_cmd(xdy_asb):
+    xdy_list = xdy_asb.split('+')
     xdy = xdy_list[0].split('d')
     try:
         x = int(xdy[0])
@@ -57,4 +60,5 @@ def parse_cmd(xdy_aSb):
 
 
 async def get_help():
-    return f'掷x个y面骰，为每个骰子增加附加值a，增加总和附加值b，使用/roll xdy+aSb'
+    return f'掷x个y面骰，为每个骰子增加附加值a，增加总和附加值b，' \
+           f'使用{default_start}roll xdy+aSb'

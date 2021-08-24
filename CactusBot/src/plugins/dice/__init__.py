@@ -13,10 +13,11 @@ _sub_plugins = set()
 _sub_plugins |= nonebot.load_plugins(
     str((Path(__file__).parent / "plugins").resolve()))
 
-__usage__ = '输入/roll help获取使用方法'
+default_start = list(nonebot.get_driver().config.command_start)[0]
+__usage__ = f'掷x个y面骰，为每个骰子增加附加值a，增加总和附加值b，使用{default_start}roll xdy+aSb'
 
-__version__ = '0.1.0'
+__help_version__ = '0.1.0'
 
-__plugin_name__ = "XZhouQD's Roll"
+__help_plugin_name__ = "XZhouQD's Dice"
 
 nonebot.export().roll = dice

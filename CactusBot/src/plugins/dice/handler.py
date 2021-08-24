@@ -6,6 +6,7 @@ from nonebot.log import logger
 
 from .processor import get_help, roll_dice
 
+
 dice = on_command("roll", priority=1, aliases={"掷骰", "骰子"})
 
 
